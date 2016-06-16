@@ -4,8 +4,7 @@ class LinksController < ApplicationController
     link = Link.where(identifier: params[:identifier]).first
     redirect_to link.url.original
   end
-
-  # GET /links
+# GET /links
   # GET /links.json
   def index
     @links = Link.all

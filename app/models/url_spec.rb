@@ -43,5 +43,4 @@ describe Url do
        }.to change{Url.count}.by(+3)
     end
   end
-
 end

@@ -22,10 +22,11 @@ class UrlsController < ApplicationController
   end
 
   # POST /urls
-    def create
-    @url = Url.create_link(url_params[:original], url_params[:custom]).url
-    redirect_to @url, notice: 'Url was successfully created.'
+  def create
+     @url = Url.create_link(url_params[:original], url_params[:custom]).url
+     redirect_to @url, notice: 'Url was successfully created.'
   end
+
 
   # POST /urls.json
   def create
@@ -74,7 +75,6 @@ class UrlsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def url_params
-      #params.require(:url).permit(:original)
-       params.require(:url).permit(:original, :custom)
+             params.require(:url).permit(:original, :custom)
     end
 end

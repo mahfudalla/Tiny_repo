@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
    root 'urls#new'
   get ':identifier' => 'links#alter_to', as: 'short_link'
-
+ 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
