@@ -1,0 +1,33 @@
+language: ruby
+rvm:
+- 2.0.0
+bundler_args: "--without production"
+addons:
+  postgresql: '9.3'
+services:
+- postgresql
+before_script:
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+script:
+- bundle exec rspec
+notifications:
+  email:
+    on_success: always
+    on_failure: always
+deploy:
+  provider: heroku
+  api_key:
+    secure: 2l5HSwclFOeQQNza+X+ivH6Hf4/CtBRFnqd4YcO4nETSgNGQGahKeovWBD7CZAqN/CKsooIhEbBEyce90NXZu9/up3IQHfxVFMNxHS2eOnHkTkcbS/XCki+T8YYRRm8KEKbj/CwZPCecPhPVRTUp+x82QJfjZ2+PSt5wbyk2FEo92apOlOSnXlOvlMDjuqUgmpd6EkZRzaHiSYXP8jE2CRpsnlhXkEGYIn54T62jKhk2Q9kTIUiekz9BIncJ5ck2vSR6zEXkKipQetqxcrNGZh4GQ91va+dBvpi18MX2uR6INDzxJHfTBpaxMCgJShWEpfyWM2jl8+JtMwpSkT6mrpj3KKpllpBIf+f5uWpnBIoF9hNBWor1JVDvKA4Uc6oqiy/e6pCNcFGHz57QXIuKWYuU91HX6NUfbLrArugVH+kYIlEKdfVRzR44ESKF25EociL5UoZtEceADfhqv9ZuoCpehFCEr0u1rZmKcSQtE+p9Yv4XAhlWcTBNBIREv7U2g8XrFONbq1tOZ/7tn9f/kLMPokW95RSBpZNXbymblthJASEZK9TrYZp0Cj6mBC0dz/0Ln6L45HIgYxvpChKosZoVpFS2tctkIppTYbum/1ucrtt0b8ahv54cNYxJKR6EJS3zBCIxPM7hZFe7fEEws1WqN235t/nfQx6Mvpp8zjA=
+  app: serene-woodland-72812
+  on:
+    repo: mahfudalla/Tiny_repo
+deploy:
+  provider: heroku
+  app: sheltered-bastion-22670
+  on:
+    repo: carmelocuenca/<el nombre de tu repositorio>
+  run: "rake db:migrate"
+  api_key:
+    secure: ... # A long number here
